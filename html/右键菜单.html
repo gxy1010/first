@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			#box{
+				width: 100px;
+				border: 1px solid #000;
+				position: absolute;
+				display: none;
+			}
+			#box a{
+				display: block;
+				width: 100%;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box">
+			<a href="javascript:;">大娃</a>
+			<a href="javascript:;">二娃</a>
+			<a href="javascript:;">三娃</a>
+			<a href="javascript:;">四娃</a>
+			<a href="javascript:;">五娃</a>
+			<a href="javascript:;">六娃</a>
+			<a href="javascript:;">七娃</a>
+		</div>
+		<script>
+			var oBox=document.getElementById('box');
+			//右键菜单事件  oncontextmenu
+			document.oncontextmenu=function(evt){
+				var s=evt || window.event;
+				oBox.style.display='block';
+				oBox.style.left=s.pageX+'px';
+				oBox.style.top=s.pageY+'px';
+				//阻止菜单出现
+				return false;
+			}
+			document.onclick=function(){
+				oBox.style.display='none';
+			}
+		</script>
+	</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			#box{
+				width: 100px;
+				height: 100px;
+				background: red;
+				position: absolute;
+			
+			}
+		</style>
+	</head>
+	<body>
+		
+		<input type="button" value='回来' id="inp"/>
+		<div id="box"></div>
+		<script>
+			var oDiv=document.getElementById('box');
+			var arr=[];
+			oDiv.onmousedown=function(evt){
+				var s=evt || window.event;
+				var x=s.offsetX;
+				var y=s.offsetY;
+				document.onmousemove=function(evt){
+					var e=evt || window.event;
+					oDiv.style.left=e.pageX-x+'px';
+					oDiv.style.top=e.pageY-y+'px';
+					arr.push({"left" : oDiv.offsetLeft,"top" : oDiv.offsetTop});
+					console.log(arr);
+				}
+				document.onmouseup=function(){
+					document.onmousemove=null;
+				}
+				////阻止拖拽的默认行为
+				document.ondragstart = function(){
+					return false;
+				}
+			}
+			
+			var oInp=document.getElementById('inp');
+			oInp.onclick=function(){
+				var index = arr.length - 1;
+				timer = setInterval(function(){
+					if (index==-1) {
+						clearInterval(timer);
+						arr=[];
+					}else{
+						oDiv.style.left=arr[index].left+'px';
+						oDiv.style.top=arr[index].top+'px';
+						index--;
+					}
+				},30)
+			}
+		</script>
+	</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			*{margin: 0; padding: 0;}
+			#box{
+				width: 300px;
+				height: 300px;
+				background: red;
+				border: 1px solid #000000;
+				position: absolute;
+			}
+			#txt{
+				width:250px;
+				height: 30px;
+				float: left;
+				border: 0;
+			}
+			#but{
+				height: 32px;
+				width: 50px;
+				border: 0;
+			}
+		</style>
+		
+	</head>
+	<body>
+		<div id="box">
+			<input type="text" id="txt" />
+			<input type="button" id="but" value="按钮"/>
+		</div>
+		<script>
+			var oBox=document.getElementById('box');
+			var oTxt=document.getElementById('txt');
+			var arr=[];
+			oTxt.onmousedown=function(evt){
+				var s=evt || window.event;
+				var x=s.offsetX;
+				var y=s.offsetY;
+				document.onmousemove=function(evt){
+					var e=evt || window.event;
+					var xT=e.pageX;
+					var winW=window.innerWidth;
+					if (xT - x < 0) {
+						xT - x==0;
+					}else if(xT - x > winW-300){
+						xT - x == winW-300;
+					}else{
+						oBox.style.left=xT-x + 'px';
+					}
+					
+					var yT=e.pageY;
+					var winH=window.innerHeight;
+					if (yT - y <0) {
+						e.pageY-y==0;
+					} else if(yT - y > winH-300){
+						yT - y == winH-300;
+					}else{
+						oBox.style.top=e.pageY-y + 'px';
+					}
+					arr.push({"left" : oBox.offsetLeft,"top" : oBox.offsetTop});
+					console.log(arr);
+				}
+				document.onmouseup=function(){
+					document.onmousemove=null;
+				}
+				document.ondragstart=function(){
+					return false;
+				}
+			}
+			
+			var oBut=document.getElementById('but');
+			oBut.onclick=function(){
+				var index=arr.length-1;
+				timer=setInterval(function(){
+					if (index == -1) {
+						clearInterval(timer);
+						arr=[];
+					} else {
+						oBox.style.left=arr[index].left + 'px';
+						oBox.style.top=arr[index].top + 'px';
+						index --;
+					}
+				},15)
+				
+			}
+		</script>
+	</body>
+</html>

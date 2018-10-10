@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			#box{
+				width: 100px;
+				height: 100px;
+				background: red;
+				position: absolute;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box"></div>
+		<script>
+			var oDiv=document.getElementById('box');
+			oDiv.onmousedown=function(evt){
+				var s=evt || window.event;
+				var x=s.offsetX;
+				var y=s.offsetY;
+				document.onmousemove=function(evt){
+					var e=evt || window.event;
+					oDiv.style.left=e.pageX-x+'px';
+					oDiv.style.top=e.pageY-y+'px';
+				}
+				document.onmouseup=function(){
+					document.onmousemove=null;
+				}
+				////阻止拖拽的默认行为
+				document.ondragstart = function(){
+					return false;
+				}
+			}
+		</script>
+	</body>
+</html>

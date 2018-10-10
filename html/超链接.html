@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<a href="http://www.baidu.com">百度</a>
+		<script>
+			var oA=document.getElementsByTagName('a')[0];
+			oA.onclick=function(evt){
+				var s=evt || window.event;
+				//标准浏览器  s.preventDefault()
+				//IE浏览器   s.returnValue=false
+				
+				//兼容
+				s.preventDefault ? s.preventDefault() : s.returnValue=false;
+			}
+		</script>
+	</body>
+</html>

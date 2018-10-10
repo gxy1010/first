@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			#box{
+				width: 400px;
+				height: 400px;
+				background: red;
+			}
+			#pox{
+				width: 200px;
+				height: 200px;
+				background: yellow;
+			}
+		</style>
+	</head>
+	<body>、
+		<div id="box">
+			<div id="pox">
+				<input type="button" id="inp" value="点击" />
+			</div>
+		</div>
+		<script>
+			var oBox=document.getElementById('box');
+			var oPox=document.getElementById('pox');
+			var oInp=document.getElementById('inp');
+			var oBody=document.body;
+			var oHtml=document.documentElement;
+			oInp.onclick=function(evt){
+				var s=evt || window.event;
+				//标准浏览器   s.stopPropagation() 
+				//IE浏览起器  s.cancelBubble=(true)
+				s=evt ? s.stopPropagation() : s.cancelBubble=(true);
+				alert('别点我，怕疼！');
+				
+			}
+			oPox.onclick=function(){
+				alert('快到兜里来！');
+			}
+			oBox.onclick=function(){
+				alert('不要到兜里去！');
+			}
+			oBody.onclick=function(){
+				alert('乖，块到兜里去');
+			}
+			oHtml.onclick=function(){
+				alert('我最老，听我的！');
+			}
+		</script>
+		
+	</body>
+</html>

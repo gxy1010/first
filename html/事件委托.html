@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<ul id="ul">
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+			<li>4</li>
+			<li>5</li>
+		</ul>
+		<script>
+			var oUl=document.getElementById('ul');
+			oUl.onclick=function(evt){
+				var s=evt || window.event;
+				//标准浏览器  target
+//				alert(s.target.innerHTML);
+				//IE浏览器   srcElement
+//				alert(s.srcElement.innerHTML);
+				
+				//兼容
+				var target=s.target || s.srcElement;
+				if (target.nodeName.toUpperCase()==='LI') {
+					alert(target.innerHTML);
+				}
+			}
+		</script>
+	</body>
+</html>

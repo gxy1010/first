@@ -1,0 +1,61 @@
+ <!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<input type="button" id="inp" value="点击" />
+		<script>
+			var oInp=document.getElementById('inp');
+			//最后一个执行的函数会将前面的覆盖
+//			oInp.onclick=fn1;
+//			oInp.onclick=fn2;
+//			oInp.onclick=fn3;
+			//标准浏览器   addEventListener();
+//			第一参: 事件(不带on)
+//			第二参: 触发函数
+//			第三参: 是否捕获(true : 捕获，false : 冒泡)   默认为false
+//			oInp.addEventListener('click',fn1,true);
+//			oInp.addEventListener('click',fn2,true);
+//			oInp.addEventListener('click',fn3,true);
+
+			//IE浏览器   attachEvent(事件驱动，函数)；
+			//第一参: 事件驱动
+			//第二参: 触发函数
+//			oInp.attachEvent('onclick',fn1);
+//			oInp.attachEvent('onclick',fn2);
+//			oInp.attachEvent('onclick',fn3);
+
+			//兼容
+			addEventListener(oInp,'click',fn1,true);
+			addEventListener(oInp,'click',fn2,true);
+			addEventListener(oInp,'click',fn3,true);
+			function addEventListener(obj,event,fn,boo){
+				if (obj.addEventListener) {
+					obj.addEventListener(event,fn,boo);
+				} else{
+					obj.attachEvent('on'+event,fn);
+				}
+			}
+			//删除其中一个监听
+			removeEventListener(oInp,'click',fn2,true);
+			function removeEventListener(obj,event,fn,boo){
+				if (obj.removeEventListener) {
+					obj.removeEventListener(event,fn,boo);
+				} else{
+					obj.detachEvent('on'+event,fn);
+				}
+			}
+			function fn1(){
+				alert(1);
+			}
+			function fn2(){
+				alert(2);
+			}
+			function fn3(){
+				alert(3);
+			}
+		</script>
+	</body>
+</html>
